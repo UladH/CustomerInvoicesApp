@@ -45,9 +45,9 @@ namespace AppDbContext
             modelBuilder.Entity<Status>().HasIndex(t => t.Id).IsUnique();
             modelBuilder.Entity<Status>().Property(t => t.Name).IsRequired();
 
+            modelBuilder.Entity<Invoice>().HasOne(t => t.Status);
             modelBuilder.Entity<Invoice>().HasIndex(t => t.Id).IsUnique();
             modelBuilder.Entity<Invoice>().Property(t => t.Date).IsRequired();
-            modelBuilder.Entity<Invoice>().Property(t => t.Status).IsRequired();
 
             Seed(modelBuilder);
         }
@@ -55,31 +55,11 @@ namespace AppDbContext
         protected void Seed(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Status>().HasData(
-                new Status
-                {
-                    Id = 1,
-                    Name = "New"
-                },
-                new Status
-                {
-                    Id = 2,
-                    Name = "On Review"
-                },
-                new Status
-                {
-                    Id = 3,
-                    Name = "Accepted"
-                },
-                new Status
-                {
-                    Id = 4,
-                    Name = "Closed"
-                },
-                new Status
-                {
-                    Id = 5,
-                    Name = "Rejected"
-                }
+                new Status { Id = 1,  Name = "New" },
+                new Status { Id = 2, Name = "On Review" },
+                new Status { Id = 3, Name = "Accepted" },
+                new Status { Id = 4, Name = "Closed" },
+                new Status { Id = 5, Name = "Rejected" }
             );
 
             modelBuilder.Entity<Invoice>().HasData(

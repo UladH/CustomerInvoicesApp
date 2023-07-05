@@ -32,6 +32,11 @@ namespace Domain.Repositories
             get { return GetService<IInvoiceRepository>(); }
         }
 
+        public IStatusRepository StatusRepository
+        {
+            get { return GetService<IStatusRepository>(); }
+        }
+
         public void SaveChanges()
         {
             context.SaveChanges();

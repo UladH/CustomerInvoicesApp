@@ -1,5 +1,8 @@
-﻿using AppConfiguration;
+﻿using App.Contracts.Interfaces;
+using App.Services.Services;
+using AppConfiguration;
 using AppDbContext;
+using AppMapper;
 using Domain.Contracts.Interfaces;
 using Domain.Contracts.Interfaces.Repositories;
 using Domain.Repositories;
@@ -21,16 +24,20 @@ namespace AppDependencyInjection
         public static void AddInfrastructureServices(this IServiceCollection services)
         {
             services.AddScoped<IAppConfiguration, AppConfiguration.AppConfiguration>();
+            services.AddSingleton(MapperBuilder.Create());
         }
 
         public static void AddDomainLayerServices(this IServiceCollection services)
         {
             services.AddTransient<IInvoiceRepository, InvoiceRepository>();
+            services.AddTransient<IStatusRepository, StatusRepository>();
             services.AddTransient<IRepositoryManager, RepositoryManager>();
         }
 
         public static void AddAppLayerServices(this IServiceCollection services)
         {
+            services.AddTransient<IStatusService, StatusService>();
+            services.AddTransient<IInvoiceService, InvoiceService>();
         }
 
         #endregion
