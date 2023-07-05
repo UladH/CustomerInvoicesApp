@@ -1,4 +1,5 @@
 ﻿using AppConfiguration;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Net;
@@ -35,6 +36,14 @@ namespace WebApi.Middlewares
                 try
                 {
                     await next(context);
+
+                    //parameter validation errors
+                    if(context.Response.StatusCode == (int)HttpStatusCode.BadRequest)
+                    {
+                        WriteObjectToStream(null, memStream);
+
+                        throw new ArgumentException("One or more validation errors occurred.");
+                    }
                 }
                 catch (Exception exception)
                 {
@@ -81,6 +90,8 @@ namespace WebApi.Middlewares
 
             switch (exception)
             {
+                case ArgumentException e:
+                    return (int)HttpStatusCode.BadRequest;
                 case KeyNotFoundException e:
                     return (int)HttpStatusCode.NotFound;
                 default:

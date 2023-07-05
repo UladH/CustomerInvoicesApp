@@ -5,5 +5,6 @@ namespace Domain.Contracts.Interfaces.Repositories
 {
     public interface IInvoiceRepository: IGeneralRepository<Invoice>
     {
+        Invoice Get(uint id);
     }
 }

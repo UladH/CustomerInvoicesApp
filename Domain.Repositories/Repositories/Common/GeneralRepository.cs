@@ -19,7 +19,7 @@ namespace Domain.Repositories.Repositories.Common
 
         #endregion
 
-        #region pubic
+        #region public
 
         public virtual IEnumerable<T> GetAll()
         {

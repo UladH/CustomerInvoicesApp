@@ -2,6 +2,7 @@
 using Domain.Contracts.Interfaces.Repositories;
 using Domain.Contracts.Models;
 using Domain.Repositories.Repositories.Common;
+using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Repositories.Repositories
 {
@@ -13,6 +14,20 @@ namespace Domain.Repositories.Repositories
             : base(context)
         {
 
+        }
+
+        #endregion
+
+        #region public
+
+        public override IEnumerable<Invoice> GetAll()
+        {
+            return dbset.Include(t => t.Status).AsEnumerable();
+        }
+
+        public Invoice Get(uint id)
+        {
+            return dbset.Include(t => t.Status).FirstOrDefault(e => e.Id == id);
         }
 
         #endregion

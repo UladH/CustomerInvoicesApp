@@ -1,6 +1,4 @@
 ﻿using App.Contracts.Interfaces;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
@@ -23,7 +21,7 @@ namespace WebApi.Controllers
         #region public
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public IActionResult GetAll()
         {
             var result = statusService.GetAll();
             return Ok(result);
