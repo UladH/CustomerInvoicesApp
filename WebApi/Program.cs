@@ -1,4 +1,5 @@
 using AppDependencyInjection;
+using WebApi.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +22,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
+app.UseMiddleware<ResponseMapperMiddleware>();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();
