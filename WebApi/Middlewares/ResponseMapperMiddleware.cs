@@ -1,7 +1,7 @@
 ﻿using AppConfiguration;
-using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using System.Diagnostics;
+using System.ComponentModel.DataAnnotations;
 using System.Net;
 using WebApi.Models;
 
@@ -40,9 +40,9 @@ namespace WebApi.Middlewares
                     //parameter validation errors
                     if(context.Response.StatusCode == (int)HttpStatusCode.BadRequest)
                     {
-                        WriteObjectToStream(null, memStream);
+                        var validationError = DeserializeFromStream(memStream);
 
-                        throw new ArgumentException("One or more validation errors occurred.");
+                        throw new ValidationException("One or more validation errors occurred.");
                     }
                 }
                 catch (Exception exception)
@@ -78,6 +78,7 @@ namespace WebApi.Middlewares
 
             var errorModel = new ErrorResponseModel()
             {
+                Code = GetErrorCodeByException(exception),
                 Message = environment.IsDevelopment() ? exception.Message : "Something went wrong. Please repeat later",
                 StackTrace = environment.IsDevelopment() ? exception.StackTrace : null
             };
@@ -90,12 +91,27 @@ namespace WebApi.Middlewares
 
             switch (exception)
             {
-                case ArgumentException e:
+                case DbUpdateConcurrencyException dbce:
+                case DbUpdateException dbue:
+                case ValidationException ve:
+                case ArgumentException ae:
                     return (int)HttpStatusCode.BadRequest;
                 case KeyNotFoundException e:
                     return (int)HttpStatusCode.NotFound;
                 default:
                     return (int)HttpStatusCode.InternalServerError;
+            }
+        }
+
+        private int? GetErrorCodeByException(Exception exception)
+        {
+
+            switch (exception)
+            {
+                case ValidationException ve:
+                    return 0;
+                default:
+                    return null;
             }
         }
 

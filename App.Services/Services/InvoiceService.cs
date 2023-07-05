@@ -1,4 +1,5 @@
 ﻿using App.Contracts.Interfaces;
+using App.Contracts.Models.Input;
 using App.Contracts.Models.Output;
 using AutoMapper;
 using Domain.Contracts.Interfaces;
@@ -43,6 +44,43 @@ namespace App.Services.Services
             var invoiceOutputModel = mapper.Map<Invoice, InvoiceOutputModel>(invoice);
 
             return invoiceOutputModel;
+        }
+
+        public InvoiceOutputModel Add(InvoiceInputModel invoiceInputModel)
+        {
+            var invoice = mapper.Map<InvoiceInputModel, Invoice>(invoiceInputModel);
+
+            repositoryManager.InvoiceRepository.Add(invoice);
+            repositoryManager.SaveChanges();
+
+            var invoiceOutputModel = mapper.Map<Invoice, InvoiceOutputModel>(invoice);
+
+            return invoiceOutputModel;
+        }
+
+        public InvoiceOutputModel Update(InvoiceInputModel invoiceInputModel)
+        {
+            var invoice = mapper.Map<InvoiceInputModel, Invoice>(invoiceInputModel);
+
+            repositoryManager.InvoiceRepository.Update(invoice);
+            repositoryManager.SaveChanges();
+
+            var invoiceOutputModel = mapper.Map<Invoice, InvoiceOutputModel>(invoice);
+
+            return invoiceOutputModel;
+        }
+
+        public uint Delete(uint id)
+        {
+            var invoice = new Invoice()
+            { 
+                Id = id
+            };
+
+            repositoryManager.InvoiceRepository.Delete(invoice);
+            repositoryManager.SaveChanges();
+
+            return id;
         }
 
         #endregion

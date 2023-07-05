@@ -3,10 +3,12 @@ using App.Services.Services;
 using AppConfiguration;
 using AppDbContext;
 using AppMapper;
+using AppValidation.Validators;
 using Domain.Contracts.Interfaces;
 using Domain.Contracts.Interfaces.Repositories;
 using Domain.Repositories;
 using Domain.Repositories.Repositories;
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace AppDependencyInjection
@@ -25,6 +27,11 @@ namespace AppDependencyInjection
         {
             services.AddScoped<IAppConfiguration, AppConfiguration.AppConfiguration>();
             services.AddSingleton(MapperBuilder.Create());
+        }
+
+        public static void AddValidators(this IServiceCollection services)
+        {
+            services.AddValidatorsFromAssemblyContaining<InvoiceInputModelValidator>();
         }
 
         public static void AddDomainLayerServices(this IServiceCollection services)

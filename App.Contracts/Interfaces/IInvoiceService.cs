@@ -1,4 +1,5 @@
-﻿using App.Contracts.Models.Output;
+﻿using App.Contracts.Models.Input;
+using App.Contracts.Models.Output;
 
 namespace App.Contracts.Interfaces
 {
@@ -6,5 +7,8 @@ namespace App.Contracts.Interfaces
     {
         IEnumerable<InvoiceOutputModel> GetAll();
         InvoiceOutputModel Get(uint id);
+        InvoiceOutputModel Add(InvoiceInputModel invoiceInputModel);
+        InvoiceOutputModel Update(InvoiceInputModel invoiceInputModel);
+        uint Delete(uint id);
     }
 }
