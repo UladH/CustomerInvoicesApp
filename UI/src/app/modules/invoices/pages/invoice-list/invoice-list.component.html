@@ -3,9 +3,16 @@
         <div class="invoice-list_axtion-row" dir="rtl">            
             <p-button label="New" styleClass="p-button-success" [routerLink]="['./new']"></p-button>
         </div>
-        <p-table [value]="invoices" *ngIf="invoices">
+        <p-table 
+            [value]="invoices" 
+            *ngIf="invoices"
+            [paginator]="true"
+            [rows]="5"
+            [showCurrentPageReport]="true"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [rowsPerPageOptions]="[5, 10, 25]">
             <ng-template pTemplate="header">
-                <tr>
+                <tr>    
                     <th>#</th>
                     <th>Date</th>
                     <th>Amount</th>
@@ -33,6 +40,12 @@
                         </p-button>
                     </td>
                 </tr>
+            </ng-template>
+            <ng-template pTemplate="paginatorleft">
+                <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+            </ng-template>
+            <ng-template pTemplate="paginatorright">
+                <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
             </ng-template>
         </p-table>
     </div>
