@@ -34,6 +34,16 @@ export class InvoicesService {
 
   //#region public
 
+  public get(id: number): Observable<InvoiceModel> {
+    return this.http.get<InvoiceInputModel>(`/api/invoice/${id}`).pipe(
+      map((data) => {
+        const invoice = this.mapper.map(data, InvoiceInputModel, InvoiceModel);
+
+        return invoice;
+      })
+    );
+  }
+
   public getAll(isForce: boolean = false): Observable<InvoiceModel[]> {
     if(this.invoices$ && !isForce){
       return this.invoices$;
@@ -84,6 +94,24 @@ export class InvoicesService {
       })
     )
   }
+
+  public update(invoice: InvoiceFormInputModel): Observable<InvoiceModel> {    
+    let invoiceOutputModel = this.mapper.map(invoice, InvoiceFormInputModel, InvoiceOutputModel);
+
+    return this.http.put<InvoiceInputModel>(`/api/invoice`, invoiceOutputModel as any).pipe(
+      map((data: InvoiceInputModel) => {
+        const invoice = this.mapper.map(data, InvoiceInputModel, InvoiceModel);
+
+        return invoice;
+      }),
+      tap((invoice: InvoiceModel) => {
+        const index = this.invoices!.findIndex((elem) => elem.id == invoice.id);
+        this.invoices![index] = invoice;
+        this.invoicesRSubject$!.next(this.invoices!);
+      })
+    )
+  }
+
 
   //#endregion
 }

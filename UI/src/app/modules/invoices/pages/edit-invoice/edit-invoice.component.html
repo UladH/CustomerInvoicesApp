@@ -1,7 +1,7 @@
 <acw-wrapper [state]="state">
     <ci-invoice-form
-        [invoice]="null"
-        title="New Invoice"
+        [title]="title"
+        [invoice]="invoice"
         (onCancel)="onCancelHandler()"
         (onSubmit)="onSubmitHandler($event)">
     </ci-invoice-form>

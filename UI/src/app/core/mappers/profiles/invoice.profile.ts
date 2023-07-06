@@ -36,19 +36,19 @@ export const invoiceProfile: MappingProfile = (mapper) => {
         InvoiceFormInputModel,
         InvoiceOutputModel,
         forMember(
-            (dest) => dest.Id,
+            (dest) => dest.id,
             mapFrom((source) => source.id)
         ),
         forMember(
-            (dest) => dest.Amount,
+            (dest) => dest.amount,
             mapFrom((source) => source.amount)
         ),
         forMember(
-            (dest) => dest.StatusId,
+            (dest) => dest.statusId,
             mapFrom((source) => source.statusId)
         ),
         forMember(
-            (dest) => dest.Date,
+            (dest) => dest.date,
             mapFrom((source) => source.date)
         ),
     );

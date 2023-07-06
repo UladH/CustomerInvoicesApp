@@ -8,6 +8,7 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { CreateInvoiceComponent } from './pages/create-invoice/create-invoice.component';
 import { FeaturesModule } from 'src/app/features/features.module';
+import { EditInvoiceComponent } from './pages/edit-invoice/edit-invoice.component';
 
 
 
@@ -15,7 +16,8 @@ import { FeaturesModule } from 'src/app/features/features.module';
   declarations: [
     InvoiceListComponent,
     InvoicesComponent,
-    CreateInvoiceComponent
+    CreateInvoiceComponent,
+    EditInvoiceComponent
   ],
   imports: [
     CommonModule,

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { InvoicesComponent } from "./invoices.component";
 import { InvoiceListComponent } from "./pages/invoice-list/invoice-list.component";
 import { CreateInvoiceComponent } from "./pages/create-invoice/create-invoice.component";
+import { EditInvoiceComponent } from "./pages/edit-invoice/edit-invoice.component";
 
 const routesChildren: Routes = [
     {
@@ -12,6 +13,10 @@ const routesChildren: Routes = [
     {
         path: 'new',
         component: CreateInvoiceComponent
+    },    
+    {
+        path: ':id',
+        component: EditInvoiceComponent
     }
 ];
   

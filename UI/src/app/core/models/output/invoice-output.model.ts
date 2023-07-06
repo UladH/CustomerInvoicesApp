@@ -1,6 +1,6 @@
 export class InvoiceOutputModel {    
-    public Id?: number;
-    public Amount!: number;
-    public Date!: string;
-    public StatusId!: number;
+    public id?: number;
+    public amount!: number;
+    public date!: string;
+    public statusId!: number;
 }

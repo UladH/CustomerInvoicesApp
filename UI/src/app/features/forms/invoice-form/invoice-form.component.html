@@ -1,7 +1,7 @@
 <acw-wrapper [state]="state">
     <h1>{{ title }}</h1>
 
-    <form [formGroup]="form" class="invoice-form">
+    <form [formGroup]="form" class="invoice-form" *ngIf="form">
         <span class="invoice-form_element p-float-label">
             <p-calendar
                 formControlName="date"

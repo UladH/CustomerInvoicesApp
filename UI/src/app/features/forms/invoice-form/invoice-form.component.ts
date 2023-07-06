@@ -5,6 +5,7 @@ import { FormGroup } from '@angular/forms';
 import { StatusModel } from 'src/app/core/models/inner/status.model';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { InvoiceFormInputModel } from 'src/app/core/models/input/invoice-form-input.model';
+import { InvoiceModel } from 'src/app/core/models/inner/invoice.model';
 
 @Component({
   selector: 'ci-invoice-form',
@@ -32,12 +33,20 @@ export class InvoiceFormComponent extends SmartComponentComponent {
 
   //#region getters setters
 
-  public get form(): FormGroup {
+  public get form(): FormGroup | null {
     return this.componentService.form;
   }
 
   public get statuses(): StatusModel[] | null{
     return this.componentService.statuses;
+  }
+
+  @Input() public set invoice(value: InvoiceModel | null){
+    this.componentService.invoice = value;
+  }
+
+  public get invoice(): InvoiceModel | null{
+    return this.componentService.invoice;
   }
   
   //#endregion
@@ -56,7 +65,7 @@ export class InvoiceFormComponent extends SmartComponentComponent {
   }
 
   public onSubmitHandler(): void {
-    if(this.form.invalid) {      
+    if(this.form!.invalid) {      
       this.messageService.add({ severity: 'error', summary: 'Error', detail: "Form is invalid"});
       return
     }
@@ -67,10 +76,10 @@ export class InvoiceFormComponent extends SmartComponentComponent {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {       
          const invoice : InvoiceFormInputModel = {
-          id: this.form.value.id,
-          amount: this.form.value.amount,
-          date: this.form.value.date,
-          statusId: this.form.value.statusId,
+          id: this.form!.value.id,
+          amount: this.form!.value.amount,
+          date: this.form!.value.date,
+          statusId: this.form!.value.statusId,
          } 
 
          this.onSubmit.emit(invoice);

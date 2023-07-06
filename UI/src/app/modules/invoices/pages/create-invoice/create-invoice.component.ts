@@ -7,7 +7,8 @@ import { InvoiceFormInputModel } from 'src/app/core/models/input/invoice-form-in
 @Component({
   selector: 'ci-create-invoice',
   templateUrl: './create-invoice.component.html',
-  styleUrls: ['./create-invoice.component.scss']
+  styleUrls: ['./create-invoice.component.scss'],
+  providers: [CreateInvoiceService]
 })
 export class CreateInvoiceComponent extends SmartComponentComponent {
   //#region constructor

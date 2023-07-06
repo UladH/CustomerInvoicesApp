@@ -20,7 +20,11 @@
                     <td>{{ invoice.amount }}</td>
                     <td>{{ invoice.status }}</td>
                     <td>
-                        <p-button icon="pi pi-pencil" styleClass="p-button-rounded p-button-text p-button-sm"></p-button>
+                        <p-button 
+                            icon="pi pi-pencil" 
+                            styleClass="p-button-rounded p-button-text p-button-sm"
+                            [routerLink]="['./'+ invoice.id]">
+                        </p-button>
                         <p-button 
                             icon="pi pi-trash" 
                             styleClass="p-button-rounded p-button-danger p-button-text p-button-sm"

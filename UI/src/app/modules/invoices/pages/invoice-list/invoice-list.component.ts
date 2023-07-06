@@ -3,6 +3,7 @@ import { SmartComponentComponent } from 'src/app/core/components/_base/smart-com
 import { InvoiceListService } from './invoice-list.service';
 import { InvoiceModel } from 'src/app/core/models/inner/invoice.model';
 import { ConfirmationService } from 'primeng/api';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'ci-invoice-list',
@@ -17,7 +18,9 @@ export class InvoiceListComponent extends SmartComponentComponent {
   constructor(
     changeDetectorRef: ChangeDetectorRef,
     protected override componentService: InvoiceListService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private router: Router,
+    private route: ActivatedRoute,
   ) {
     super(changeDetectorRef, componentService);
   }
