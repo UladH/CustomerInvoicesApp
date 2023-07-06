@@ -40,8 +40,6 @@ namespace WebApi.Middlewares
                     //parameter validation errors
                     if(context.Response.StatusCode == (int)HttpStatusCode.BadRequest)
                     {
-                        var validationError = DeserializeFromStream(memStream);
-
                         throw new ValidationException("One or more validation errors occurred.");
                     }
                 }
