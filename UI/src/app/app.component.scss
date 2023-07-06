@@ -1,0 +1,10 @@
+.app_wrapper{
+    height: 100%;
+    flex-direction: column;
+    box-sizing: border-box;
+    display: flex;
+    place-content: stretch flex-start;
+    align-items: stretch;
+    max-width: 100%;
+    gap: 10px;
+}

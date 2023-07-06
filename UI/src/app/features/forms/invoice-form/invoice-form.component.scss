@@ -1,3 +1,12 @@
+.invoice-form_wrapper{    
+    height: 100%;
+    flex-direction: column;
+    box-sizing: border-box;
+    display: flex;
+    place-content: center;
+    align-items: center;
+}
+
 .invoice-form{
     height: 100%;
     flex-direction: column;
@@ -7,4 +16,15 @@
     align-items: stretch;
     max-width: 100%;
     gap: 30px;
+}
+
+.invoice-form_actions{
+    height: 100%;
+    flex-direction: row;
+    box-sizing: border-box;
+    display: flex;
+    place-content: flex-start space-between;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px 0 0 0;
 }

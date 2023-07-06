@@ -9,6 +9,7 @@ import { ResponceInterceptor } from './core/interceptors/responce.interceptor';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { MenubarModule } from 'primeng/menubar';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     BrowserAnimationsModule,
     HttpClientModule,
     ToastModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    MenubarModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ResponceInterceptor, multi: true },
