@@ -23,5 +23,11 @@ export class HttpService {
     });
   }
 
+  public delete<T>(url: string,  payload?: { [key: string]: string | boolean | number}): Observable<T> {
+    return this.http.delete<T>(url, {
+      body: payload
+    });
+  }
+
   //#endregion
 }

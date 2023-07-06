@@ -5,6 +5,7 @@ import { InvoicesComponent } from './invoices.component';
 import { InvoicesRoutingModule } from './invoices-routing.module';
 import { WrapperModule } from 'acwrapper';
 import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
 
 
 
@@ -17,7 +18,8 @@ import { TableModule } from 'primeng/table';
     CommonModule,
     InvoicesRoutingModule,
     WrapperModule,
-    TableModule
+    TableModule,
+    ButtonModule
   ]
 })
 export class InvoicesModule { }

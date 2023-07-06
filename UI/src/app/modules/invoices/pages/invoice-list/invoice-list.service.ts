@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ComponentState } from 'acwrapper';
+import { MessageService } from 'primeng/api';
 import { catchError, throwError } from 'rxjs';
 import { SmartComponentService } from 'src/app/core/components/_base/smart-components/smart-component/smart-component.service';
 import { InvoiceModel } from 'src/app/core/models/inner/invoice.model';
@@ -14,7 +15,8 @@ export class InvoiceListService extends SmartComponentService {
   //#region constructor 
 
   constructor(
-    private invoicesService: InvoicesService
+    private invoicesService: InvoicesService,
+    private messageService: MessageService
   ) {
     super();
   }
@@ -29,6 +31,22 @@ export class InvoiceListService extends SmartComponentService {
 
   private set invoices(value: InvoiceModel[] | null){
     this._invoices = value;
+  }
+
+  //#endregion
+
+  //#region public
+
+  public delete(id: number): void {
+    this.state = ComponentState.Loader;
+
+    this.invoicesService.delete(id).subscribe({
+      next: (id: number) => {
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: `The invoice #${id} was successfully deleted` });
+        this.state = ComponentState.Content;
+      },
+      error: (error) => this.state = ComponentState.Content
+    });
   }
 
   //#endregion

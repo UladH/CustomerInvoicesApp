@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './utils/http.service';
-import { Observable, ReplaySubject, map } from 'rxjs';
+import { Observable, ReplaySubject, map, tap } from 'rxjs';
 import { InvoiceInputModel } from '../models/input/invoice-input.model';
 import { InvoiceModel } from '../models/inner/invoice.model';
 import { MapperService } from '../mappers/mapper.service';
@@ -48,14 +48,23 @@ export class InvoicesService {
     ).subscribe({
       next: (invoices) => {
         this.invoices = invoices;
-        this.invoicesRSubject$?.next(this.invoices);
+        this.invoicesRSubject$!.next(this.invoices);
       },
       error: (error) => {
-        this.invoicesRSubject$?.error(error);
+        this.invoicesRSubject$!.error(error);
       }
     });
     
     return this.invoices$!;
+  }
+
+  public delete(id: number): Observable<number> {
+    return this.http.delete<number>(`/api/invoice/${id}`).pipe(
+      tap((id: number) => {
+        this.invoices = this.invoices!.filter((invoice) => invoice.id != id)
+        this.invoicesRSubject$!.next(this.invoices);
+      })
+    )
   }
 
   //#endregion
