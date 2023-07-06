@@ -6,20 +6,24 @@ import { InvoicesRoutingModule } from './invoices-routing.module';
 import { WrapperModule } from 'acwrapper';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
+import { CreateInvoiceComponent } from './pages/create-invoice/create-invoice.component';
+import { FeaturesModule } from 'src/app/features/features.module';
 
 
 
 @NgModule({
   declarations: [
     InvoiceListComponent,
-    InvoicesComponent
+    InvoicesComponent,
+    CreateInvoiceComponent
   ],
   imports: [
     CommonModule,
     InvoicesRoutingModule,
     WrapperModule,
     TableModule,
-    ButtonModule
+    ButtonModule,
+    FeaturesModule
   ]
 })
 export class InvoicesModule { }

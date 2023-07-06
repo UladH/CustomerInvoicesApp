@@ -4,6 +4,8 @@ import { Observable, ReplaySubject, map, tap } from 'rxjs';
 import { InvoiceInputModel } from '../models/input/invoice-input.model';
 import { InvoiceModel } from '../models/inner/invoice.model';
 import { MapperService } from '../mappers/mapper.service';
+import { InvoiceFormInputModel } from '../models/input/invoice-form-input.model';
+import { InvoiceOutputModel } from '../models/output/invoice-output.model';
 
 @Injectable({
   providedIn: 'root'
@@ -63,6 +65,22 @@ export class InvoicesService {
       tap((id: number) => {
         this.invoices = this.invoices!.filter((invoice) => invoice.id != id)
         this.invoicesRSubject$!.next(this.invoices);
+      })
+    )
+  }
+
+  public create(invoice: InvoiceFormInputModel): Observable<InvoiceModel> {    
+    let invoiceOutputModel = this.mapper.map(invoice, InvoiceFormInputModel, InvoiceOutputModel);
+
+    return this.http.post<InvoiceInputModel>(`/api/invoice`, invoiceOutputModel as any).pipe(
+      map((data: InvoiceInputModel) => {
+        const invoice = this.mapper.map(data, InvoiceInputModel, InvoiceModel);
+
+        return invoice;
+      }),
+      tap((invoice: InvoiceModel) => {
+        this.invoices!.push(invoice);
+        this.invoicesRSubject$!.next(this.invoices!);
       })
     )
   }

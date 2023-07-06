@@ -1,0 +1,35 @@
+<acw-wrapper [state]="state">
+    <h1>{{ title }}</h1>
+
+    <form [formGroup]="form" class="invoice-form">
+        <span class="invoice-form_element p-float-label">
+            <p-calendar
+                formControlName="date"
+                dateFormat="dd.mm.yy">
+            </p-calendar>
+            <label for="date">Date</label>
+        </span>
+        <span class="invoice-form_element p-float-label">
+            <p-inputNumber
+                formControlName="amount"
+                mode="currency" 
+                currency="USD" 
+                [minFractionDigits]="2">
+            </p-inputNumber>
+            <label for="amount">Amount</label>
+        </span>
+        <span class="invoice-form_element p-float-label">
+            <p-dropdown
+                formControlName="statusId" 
+                optionLabel="name" 
+                optionValue="id"
+                [options]="statuses || []">        
+            </p-dropdown>
+            <label for="currency">Status</label>
+        </span>
+    </form>
+    <div>
+        <p-button label="Submit" styleClass="p-button-success" (onClick)="onSubmitHandler()"></p-button>
+        <p-button label="Cancel" (onClick)="onCancelHandler()"></p-button>
+    </div>
+</acw-wrapper>

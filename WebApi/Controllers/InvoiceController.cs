@@ -40,7 +40,7 @@ namespace WebApi.Controllers
         public IActionResult Add([FromBody] InvoiceInputModel invoice)
         {
             var result = invoiceService.Add(invoice);
-            return Created(nameof(Add), result);
+            return Ok(result);
         }
 
         [HttpPut]

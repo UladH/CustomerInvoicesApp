@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { classes } from '@automapper/classes';
 import { Dictionary, MapOptions, Mapper, ModelIdentifier, addProfile, createMapper } from '@automapper/core';
 import { invoiceProfile } from './profiles/invoice.profile';
+import { statusProfile } from './profiles/status.profile';
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +42,7 @@ export class MapperService {
 
   private addProfiles(): void{
     addProfile(this.mapper, invoiceProfile);
+    addProfile(this.mapper, statusProfile);
   }
 
   //#endregion 

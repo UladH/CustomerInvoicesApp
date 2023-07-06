@@ -1,4 +1,4 @@
-.invoice-list_wrapper{
+.invoice-form{
     height: 100%;
     flex-direction: column;
     box-sizing: border-box;
@@ -7,11 +7,4 @@
     align-items: stretch;
     max-width: 100%;
     gap: 30px;
-}
-
-.invoice-list_axtion-row{
-    flex-direction: row;
-    box-sizing: border-box;
-    display: flex;
-    flex: 1 1 0%;
 }

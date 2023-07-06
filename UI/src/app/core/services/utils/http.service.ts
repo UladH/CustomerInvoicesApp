@@ -23,6 +23,14 @@ export class HttpService {
     });
   }
 
+  public post<T>(url: string,  payload?: { [key: string]: string | boolean | number}): Observable<T> {
+    return this.http.post<T>(url, payload);
+  }
+
+  public put<T>(url: string,  payload?: { [key: string]: string | boolean | number}): Observable<T> {
+    return this.http.put<T>(url, payload);
+  }
+
   public delete<T>(url: string,  payload?: { [key: string]: string | boolean | number}): Observable<T> {
     return this.http.delete<T>(url, {
       body: payload
